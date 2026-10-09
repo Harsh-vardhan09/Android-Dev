@@ -6,7 +6,7 @@ import Logo from '../assets/img/logo.jpg'
 const Home = () => {
   return (
     <SafeAreaView style={styles.container}>
-        <Image source={Logo} style={{marginVertical:20,}}/>
+        <Image source={Logo} style={{marginVertical:20, height:100,width:100}}/>
       <Text style={styles.title}>The numner 1</Text>
       <Text style={{ marginTop: 10, marginBottom: 30 }}>Reading list app</Text>
 
