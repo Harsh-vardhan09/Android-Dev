@@ -23,11 +23,11 @@ const Home = () => {
         <Text>Hello this is a card</Text>
       </View>
 
-      <Link href="/about" style={styles.Link}>
-        <ThemedText>About page</ThemedText>
+      <Link href="/login" style={styles.Link}>
+        <ThemedText>Login</ThemedText>
       </Link>
-      <Link href="/contact" style={styles.Link}>
-        <ThemedText>contact page</ThemedText>
+      <Link href="/register" style={styles.Link}>
+        <ThemedText>Register</ThemedText>
       </Link>
     </ThemedView>
   );

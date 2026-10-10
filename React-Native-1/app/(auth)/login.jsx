@@ -1,14 +1,35 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import { StyleSheet } from "react-native";
+import ThemedView from "../../components/ThemedView";
+import ThemedText from "../../components/ThemedText";
+import Spacer from "../../components/Spacer";
+import { Link } from "expo-router";
 
 const Login = () => {
   return (
-    <View>
-      <Text>Login</Text>
-    </View>
-  )
-}
+    <ThemedView style={styles.container}>
+      <Spacer />
+      <ThemedText title={true} style={styles.title}>
+        Login to Your Account
+      </ThemedText>
 
-export default Login
+      <Spacer height={100} />
+      <Link href="/register" style={{ textAlign: "center" }}>
+        Register instead
+      </Link>
+    </ThemedView>
+  );
+};
 
-const styles = StyleSheet.create({})
+export default Login;
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: "center",
+  },
+  title: {
+    textAlign: "center",
+    fontSize: 18,
+    marginBottom: 30,
+  },
+});
