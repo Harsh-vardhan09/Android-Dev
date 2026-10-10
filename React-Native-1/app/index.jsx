@@ -1,25 +1,35 @@
-import { StyleSheet, Text, View,Image } from "react-native";
+import { StyleSheet, Text, View, Image } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import {Link} from 'expo-router'
-import Logo from '../assets/img/logo.jpg'
+import { Link } from "expo-router";
+
+//Themed components
+import ThemedView from "../components/ThemedView";
+import ThemedLogo from "../components/ThemedLogo";
+import Spacer from "../components/Spacer";
+import ThemedText from "../components/ThemedText";
 
 const Home = () => {
   return (
-    <SafeAreaView style={styles.container}>
-        <Image source={Logo} style={{marginVertical:20, height:100,width:100}}/>
-      <Text style={styles.title}>The numner 1</Text>
-      <Text style={{ marginTop: 10, marginBottom: 30 }}>Reading list app</Text>
-
+    <ThemedView style={styles.container}>
+      <ThemedLogo />
+      <Spacer />
+      <ThemedText style={styles.title} title={true}>
+        The number 1
+      </ThemedText>
+      <Spacer height={20} />
+      <ThemedText>Reading list app</ThemedText>
+      <Spacer />
       <View style={styles.card}>
-        <Text>
-            Hello this is a card
-        </Text>
+        <Text>Hello this is a card</Text>
       </View>
 
-      <Link href="/about" style={styles.Link}>About page</Link>
-      <Link href="/contact" style={styles.Link}>contact page</Link>
-
-    </SafeAreaView>
+      <Link href="/about" style={styles.Link}>
+        <ThemedText>About page</ThemedText>
+      </Link>
+      <Link href="/contact" style={styles.Link}>
+        <ThemedText>contact page</ThemedText>
+      </Link>
+    </ThemedView>
   );
 };
 
@@ -35,13 +45,13 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     fontSize: 18,
   },
-  card:{
-    backgroundColor:"#eee",
-    padding:20,
-    borderRadius:5,
-    boxShadow:'4px 4px rgba(0,0,0,0.1)'
+  card: {
+    backgroundColor: "#eee",
+    padding: 20,
+    borderRadius: 5,
+    boxShadow: "4px 4px rgba(0,0,0,0.1)",
   },
-  Link:{
-    marginVertical:10,
-  }
+  Link: {
+    marginVertical: 10,
+  },
 });
