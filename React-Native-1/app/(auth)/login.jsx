@@ -1,4 +1,4 @@
-import { StyleSheet, Pressable, Text, TextInput, Keyboard } from "react-native";
+import { StyleSheet, Text, Keyboard } from "react-native";
 import ThemedView from "../../components/ThemedView";
 import ThemedText from "../../components/ThemedText";
 import Spacer from "../../components/Spacer";
@@ -8,21 +8,21 @@ import ThemedTextInput from "../../components/ThemedTextInput";
 import { useState } from "react";
 import { TouchableWithoutFeedback } from "react-native";
 import { useUser } from "../../hooks/useUser";
+import { Colors } from "../../constants/Colors";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState(null);
+  const { login } = useUser();
 
-  const {login}=useUser();
-
-
-  const handleSubmit = async() => {
-   try {
-    await login(email,password);    
-   } catch (error) {
-    
-   }
-    
+  const handleSubmit = async () => {
+    setError(null);
+    try {
+      await login(email, password);
+    } catch (error) {
+      setError(error.message);
+    }
   };
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
@@ -53,10 +53,12 @@ const Login = () => {
         >
           <Text style={{ color: "#f2f2f2" }}>Login</Text>
         </ThemedButton>
+        <Spacer />
+        {error && <Text style={styles.error}>{error}</Text>}
 
         <Spacer height={100} />
         <Link href="/register" style={{ textAlign: "center" }}>
-          Login instead
+          Register instead
         </Link>
       </ThemedView>
     </TouchableWithoutFeedback>
@@ -76,4 +78,13 @@ const styles = StyleSheet.create({
     fontSize: 18,
     marginBottom: 30,
   },
+  error:{
+    color:Colors.warning,
+    padding:10,
+    backgroundColor:'#f5c1c8',
+    borderColor:Colors.warning,
+    borderWidth:1,
+    borderRadius:6,
+    marginHorizontal:10
+  }
 });

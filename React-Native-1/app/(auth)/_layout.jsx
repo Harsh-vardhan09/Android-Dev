@@ -1,9 +1,10 @@
 import { Stack } from "expo-router";
 import { StatusBar } from "expo-status-bar";
+import GuestOnly from "../../components/auth/GuestOnly";
 
 const _layout = () => {
   return (
-    <>
+    <GuestOnly>
       <StatusBar style="auto" />
       <Stack
         screenOptions={{
@@ -11,7 +12,7 @@ const _layout = () => {
           animation: "none",
         }}
       />
-    </>
+    </GuestOnly>
   );
 };
 

@@ -2,6 +2,7 @@ import { Slot, Stack } from "expo-router";
 import { StyleSheet, Text, useColorScheme, View } from "react-native";
 import { Colors } from "../constants/Colors.js";
 import { StatusBar } from "expo-status-bar";
+import { UserProvider } from "../context/UserContext.jsx";
 
 const RootLayout = () => {
   const colorScheme = useColorScheme();
