@@ -12,7 +12,7 @@ const GuestOnly = ({ children }) => {
       router.replace("/profile");
     }
   }, [user, authChecked]);
-  if (!authChecked || !user) {
+  if (!authChecked || user) {
     return <ThemedLoader/>
   }
   return children;
