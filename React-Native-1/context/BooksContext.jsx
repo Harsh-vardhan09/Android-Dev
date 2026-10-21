@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { databases } from "../lib/appwrite";
+import { databases, client } from "../lib/appwrite";
 import { ID, Permission, Query, Role } from "react-native-appwrite";
 import { useUser } from "../hooks/useUser";
 
@@ -17,14 +17,11 @@ export function BooksProvider({ children }) {
       const response = await databases.listRows({
         databaseId: DATABASE_ID,
         tableId: TABLE_ID,
-        queries:[
-            Query.equal('user_id',user.$id)
-        ]
-      })
+        queries: [Query.equal("user_id", user.$id)],
+      });
 
-      setBooks(response.rows)
+      setBooks(response.rows);
       console.log(response.rows);
-
     } catch (error) {
       console.error(error);
     }
@@ -65,13 +62,28 @@ export function BooksProvider({ children }) {
     }
   }
 
-  useEffect(()=>{
-    if(user){
-        fetchBooks()
-    }else{
-        setBooks([])
+  useEffect(() => {
+    let unsubscribe;
+    const channel = `databases.${DATABASE_ID}.tables.${TABLE_ID}.rows`;
+
+    if (user) {
+      fetchBooks();
+
+      unsubscribe = client.subscribe(channel, (response) => {
+        const { payload, events } = response;
+
+        if (events[0].includes("create")) {
+          setBooks((prevBooks) => [...prevBooks, payload]);
+        }
+      });
+    } else {
+      setBooks([]);
     }
-  },[user])
+
+    return () => {
+      if (unsubscribe) unsubscribe();
+    };
+  }, [user]);
   return (
     <BooksContext.Provider
       value={{ books, fetchBooks, fetchBooksById, createBook, deleteBook }}
