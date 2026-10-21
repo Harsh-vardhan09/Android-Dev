@@ -10,7 +10,7 @@ import { useRouter } from "expo-router";
 
 const Books = () => {
   const { books } = useBooks();
-  const router=useRouter()
+  const router = useRouter();
 
   return (
     <ThemedView style={styles.container} safe={true}>
@@ -24,14 +24,11 @@ const Books = () => {
         keyExtractor={(item) => item.$id}
         contentContainerStyle={styles.list}
         renderItem={({ item }) => (
-          <Pressable onPress={()=>router.push(`/books/${item.$id}`)}>
+          <Pressable onPress={() => router.push(`/books/${item.$id}`)}>
             <ThemedCard style={styles.card}>
               <ThemedText style={styles.title}>{item.title}</ThemedText>
               <ThemedText style={styles.author}>
                 Written by {item.author}
-              </ThemedText>
-              <ThemedText style={styles.description}>
-                {item.description}
               </ThemedText>
             </ThemedCard>
           </Pressable>
@@ -54,7 +51,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   list: {
-    marginTop: 40
+    marginTop: 40,
   },
   card: {
     width: "90%",
@@ -63,11 +60,11 @@ const styles = StyleSheet.create({
     padding: 10,
     paddingLeft: 14,
     borderLeftColor: Colors.primary,
-    borderLeftWidth: 4
+    borderLeftWidth: 4,
   },
   title: {
     fontSize: 20,
     fontWeight: "bold",
     marginBottom: 10,
   },
-})
+});
